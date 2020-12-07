@@ -4,12 +4,10 @@ const router = express.Router();
 
 const articleCtrl = require("../controllers/articleController");
 
-const auth = require("../authentification/authMiddleware");
-
-const authorize = require("../middleware/role");
+const authorize = require("../middleware/roleMiddleware");
 
 
-router.get("/", authorize(), articleCtrl.getAllArticles);
+router.get("/", articleCtrl.getAllArticles);
 router.post("/", authorize(), articleCtrl.createArticle);
 router.get("/:id", authorize(), articleCtrl.getOneArticle);
 router.put("/:id", authorize(), articleCtrl.modifyArticle);

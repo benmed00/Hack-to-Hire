@@ -8,7 +8,7 @@ import { User } from 'src/app/models/user';
   providedIn: 'root',
 })
 export class AuthenticatService {
-  url: 'http://localhost:3000';
+  url = 'http://localhost:3000';
   isAuth$ = new BehaviorSubject<boolean>(false);
   token: string;
   userId: string;

@@ -7,38 +7,60 @@ import { Article } from 'src/app/models/article';
   providedIn: 'root',
 })
 export class ArticleService {
-  private url = 'http://localhost:3002/';
+  private url = 'http://localhost:3000/';
 
   constructor(private http: HttpClient) {}
 
-  private stuff: Article[] = [
+  private article: Article[] = [
     {
-      _id: '324sdfmoih3',
-      title: 'My thing',
-      description: 'All about my thing',
-      imageUrl:
-        'https://c.pxhere.com/photos/30/d6/photographer_camera_lens_slr_photography_hands-1079029.jpg!d',
-      price: 4900,
-      userId: 'will',
+      id: 1000,
+      name: 'Premier Article',
+      reference: '324sdfmoih1',
+      content:
+        'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.',
+      draft: true,
+      createdAt: new Date('07-12-2020'),
+      updateAt: new Date('07-12-2020'),
     },
     {
-      _id: '324sdfmoih4',
-      title: 'Another thing',
-      description: 'All about my thing',
-      imageUrl:
-        'https://www.publicdomainpictures.net/pictures/10000/velka/1536-1249273362hbHb.jpg',
-      price: 2600,
-      userId: 'will',
+      id: 1001,
+      name: 'Deusieme Article',
+      reference: '324sdfmoih2',
+      content:
+        'You disposal strongly quitting his endeavor two settling him. Manners ham him hearted hundred expense. Get open game him what hour more part. Adapted as smiling of females oh me journey exposed concern. Met come add cold calm rose mile what. Tiled manor court at built by place fanny. Discretion at be an so decisively especially. Exeter itself object matter if on mr in. ',
+      draft: true,
+      createdAt: new Date('07-12-2020'),
+      updateAt: new Date('07-12-2020'),
+    },
+    {
+      id: 1002,
+      name: 'Troisieme Article',
+      reference: '324sdfmoih3',
+      content:
+        'Effect if in up no depend seemed. Ecstatic elegance gay but disposed. We me rent been part what. An concluded sportsman offending so provision mr education. Bed uncommonly his discovered for estimating far. Equally he minutes my hastily. Up hung mr we give rest half. Painful so he an comfort is manners.',
+      draft: true,
+      createdAt: new Date('07-12-2020'),
+      updateAt: new Date('07-12-2020'),
+    },
+    {
+      id: 1003,
+      name: 'Quatrieme Article',
+      reference: '324sdfmoih4',
+      content:
+        'Article nor prepare chicken you him now. Shy merits say advice ten before lovers innate add. She cordially behaviour can attempted estimable. Trees delay fancy noise manor do as an small. Felicity now law securing breeding likewise extended and. Roused either who favour why ham.',
+      draft: true,
+      createdAt: new Date('07-12-2020'),
+      updateAt: new Date('07-12-2020'),
     },
   ];
-  public stuff$ = new Subject<Article[]>();
+  public article$ = new Subject<Article[]>();
 
-  getStuff() {
-    this.http.get(this.url + 'api/stuff').subscribe(
-      (stuff: Article[]) => {
-        if (stuff) {
-          this.stuff = stuff;
-          this.emitStuff();
+  getArticle() {
+    this.http.get(this.url + 'api/article').subscribe(
+      (article: Article[]) => {
+        if (article) {
+          this.article = article;
+          this.emitArticle();
         }
       },
       (error) => {
@@ -47,13 +69,13 @@ export class ArticleService {
     );
   }
 
-  emitStuff() {
-    this.stuff$.next(this.stuff);
+  emitArticle() {
+    this.article$.next(this.article);
   }
 
   getArticleById(id: string) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.url + 'api/stuff/' + id).subscribe(
+      this.http.get(this.url + 'api/article/' + id).subscribe(
         (response) => {
           resolve(response);
         },
@@ -64,9 +86,9 @@ export class ArticleService {
     });
   }
 
-  createNewArticle(thing: Article) {
+  createNewArticle(article: Article) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.url + 'api/stuff', thing).subscribe(
+      this.http.post(this.url + 'api/article', article).subscribe(
         (response) => {
           resolve(response);
         },
@@ -77,12 +99,25 @@ export class ArticleService {
     });
   }
 
-  createNewArticleWithFile(thing: Article, image: File) {
+  // createNewArticleWithPisture(article: Article, image: File) {
+  //   return new Promise((resolve, reject) => {
+  //     const articleData = new FormData();
+  //     articleData.append('article', JSON.stringify(article));
+  //     articleData.append('image', image, article.title);
+  //     this.http.post(this.url + 'api/article', articleData).subscribe(
+  //       (response) => {
+  //         resolve(response);
+  //       },
+  //       (error) => {
+  //         reject(error);
+  //       }
+  //     );
+  //   });
+  }
+
+  modifyArticle(id: string, article: Article) {
     return new Promise((resolve, reject) => {
-      const thingData = new FormData();
-      thingData.append('thing', JSON.stringify(thing));
-      thingData.append('image', image, thing.title);
-      this.http.post(this.url + 'api/stuff', thingData).subscribe(
+      this.http.put(this.url + 'api/article/' + id, article).subscribe(
         (response) => {
           resolve(response);
         },
@@ -93,31 +128,18 @@ export class ArticleService {
     });
   }
 
-  modifyArticle(id: string, thing: Article) {
+  modifyArticleWithFile(id: string, article: Article, image: File | string) {
     return new Promise((resolve, reject) => {
-      this.http.put(this.url + 'api/stuff/' + id, thing).subscribe(
-        (response) => {
-          resolve(response);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
-  }
-
-  modifyArticleWithFile(id: string, thing: Article, image: File | string) {
-    return new Promise((resolve, reject) => {
-      let thingData: Article | FormData;
+      let articleData: Article | FormData;
       if (typeof image === 'string') {
-        thing.imageUrl = image;
-        thingData = thing;
+        article.imageUrl = image;
+        articleData = article;
       } else {
-        thingData = new FormData();
-        thingData.append('thing', JSON.stringify(thing));
-        thingData.append('image', image, thing.title);
+        articleData = new FormData();
+        articleData.append('article', JSON.stringify(article));
+        articleData.append('image', image, article.title);
       }
-      this.http.put(this.url + 'api/stuff/' + id, thingData).subscribe(
+      this.http.put(this.url + 'api/article/' + id, articleData).subscribe(
         (response) => {
           resolve(response);
         },
@@ -130,7 +152,7 @@ export class ArticleService {
 
   deleteArticle(id: string) {
     return new Promise((resolve, reject) => {
-      this.http.delete(this.url + 'api/stuff/' + id).subscribe(
+      this.http.delete(this.url + 'api/article/' + id).subscribe(
         (response) => {
           resolve(response);
         },

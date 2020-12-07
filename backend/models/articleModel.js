@@ -7,7 +7,7 @@ const articleSchema = mongoose.Schema({
     content: { type: String, required: true },
     draft: { type: String },
     createdAt: { type: Date },
-    updatedAt: { type: Date },
+    updateAt: { type: Date },
 });
 
 articleSchema.plugin(uniqueValidator);

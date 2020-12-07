@@ -1,4 +1,4 @@
-const auth = require("./auth");
+const auth = require("../authentification/authMiddleware");
 
 function authorize(role) {
 

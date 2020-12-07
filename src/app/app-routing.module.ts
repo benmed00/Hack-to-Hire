@@ -1,3 +1,4 @@
+import { EditArticleComponent } from './article/edit-article/edit-article.component';
 import { AuthGuard } from './Services/auth/auth-guard.service';
 import { LoginComponent } from './auth/login/login.component';
 import { DefaultAngularComponent } from './default-angular/default-angular.component';
@@ -6,6 +7,8 @@ import { ArticleComponent } from './article/article.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SignupComponent } from './auth/signup/signup.component';
+import { ListArticlesComponent } from './article/list-articles/list-articles.component';
+import { AddArticleComponent } from './article/add-article/add-article.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/default', pathMatch: 'full' },
@@ -17,22 +20,23 @@ const routes: Routes = [
     path: 'article',
     component: ArticleComponent,
     pathMatch: 'full',
+    canActivate: [AuthGuard],
   },
   {
     path: 'edit-article',
-    component: ArticleComponent,
+    component: EditArticleComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard],
   },
   {
     path: 'list-articles',
-    component: ArticleComponent,
+    component: ListArticlesComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard],
   },
   {
     path: 'add-article',
-    component: ArticleComponent,
+    component: AddArticleComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard],
   },

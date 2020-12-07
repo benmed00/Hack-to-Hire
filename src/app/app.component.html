@@ -30,6 +30,15 @@
                 <a routerLink="/">
           Material Blog
         </a>
+                <a routerLink="/auth/signup">
+           | Sign UP
+        </a>
+                <a routerLink="/auth/login">
+          | Sign In
+        </a>
+                <a routerLink="/auth/login" (click)="onLogout()">
+           | Sign Out
+         </a>
             </div>
             <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
                 <ul fxLayout fxLayoutGap="20px" class="navigation-items">
