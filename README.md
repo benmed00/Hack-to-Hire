@@ -1,27 +1,43 @@
 # MeduimAngularSsr
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
+This project was generated with Angular CLI, it is in Beta mode not complete yet especialy the Front-End.
+
+A Miduim like aproche to managing articles 
+
+# Start the project
+$ git clone ...
+$ cd ./MeduimAngularSsr
+$ npm i
+$ ng s
+$ cd ./Backend
+$ npm i
+$ nodemon server
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Front-End Angular 10: ng serve > `http://localhost:4200/`
+Backend Nodejs 14 : npm start (nodemon server)`http://localhost:3000/`
 
-## Code scaffolding
-
+## Backend
+- Nodejs(Express)
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Backend
+Front-End is not complet
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Running unit tests
-
+The unit tests are not yet implemented. 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Further info
+Create an issue or a pull request (PR) | merge request (MR)
+||
+Contact me into : benyakoub@gmail.com (working full time, so brobably responses will be in Saturday|Sunday)
