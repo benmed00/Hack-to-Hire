@@ -1,0 +1,44 @@
+<!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
+<!-- <div class="col-sm-8 offset-sm-2 mt-2" *ngIf="!loading">
+    <form [formGroup]="loginForm">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" formControlName="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" formControlName="password" class="form-control">
+        </div>
+        <button class="btn btn-success" (click)="onLogin()" [disabled]="loginForm.invalid">Login</button>
+    </form>
+    <p>{{ errorMessage }}</p>
+</div> -->
+
+<mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <p>
+                <mat-form-field>
+                    <label for="email">Email address</label>
+                    <input matInput type="email" id="email" formControlName="email" class="form-control">
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field><label for="password">Password</label>
+                    <input matInput matInput type="password" id="password" formControlName="password" class="form-control">
+                </mat-form-field>
+            </p>
+
+            <!-- <p *ngIf="error" class="error">
+         {{ error }}
+       </p> -->
+
+            <div class="button">
+                <button type="submit" mat-button [disabled]="loginForm.invalid">Login</button>
+            </div>
+
+        </form>
+    </mat-card-content>
+</mat-card>

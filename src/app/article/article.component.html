@@ -1,0 +1,185 @@
+<button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" [routerLink]="['/default']" routerLinkActive="router-link-active">
+   <mat-icon>keyboard_backspace</mat-icon>
+ </button>
+
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            List of articles
+        </mat-panel-title>
+        <mat-panel-description>
+            click to {{panelOpenState ? 'close' : 'open'}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-card class="card">
+        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <h3>Recent Posts</h3>
+        </mat-card-title>
+        <mat-card-content>
+            <div class="example-container mat-elevation-z8">
+                <mat-table #table [dataSource]="dataSource">
+                    <ng-container matColumnDef="date_posted">
+                        <mat-header-cell *matHeaderCellDef> Date Posted </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.date_posted | date: 'd/M/y'}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="category">
+                        <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="delete">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <a (click)="deletePost(element.position)" type="button">
+                                <mat-icon class="icon">delete</mat-icon>
+                            </a>
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</mat-expansion-panel>
+
+
+<br>
+
+<button button="submit" mat-raised-button color="primary" (click)="addArticleDialog()">
+  <mat-icon>add</mat-icon> Add Post
+</button>
+
+<mat-grid-list cols="5" rowHeight="500px">
+
+    <mat-grid-tile colspan="3" rowspan="3" style="margin: 3%; border-right: 3px solid black;">
+        <mat-card class="article" style="padding: 5%;" class="example-card">
+            <mat-card-header class="example-card-header" style="">
+                <div rmat-card-avata class="example-header-image"></div>
+                <mat-card-title>{{titleOftheArticle}}</mat-card-title>
+                <mat-card-subtitle> author : {{author}}, Published at : {{publicationDate | date:'dd/MM/yyyy'}} </mat-card-subtitle>
+
+                <app-tag></app-tag>
+
+                <button mat-button>
+                  <mat-icon>create</mat-icon>
+                  Edit article
+                </button>
+                <button mat-button>
+                  <mat-icon>published_with_changes</mat-icon>
+                  Publish article
+                </button>
+
+            </mat-card-header>
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" style="width: 75%;">
+            <mat-card-content>
+                <h3><b>The dog</b></h3>
+                <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                </p>
+                <h3><b>The history of the city</b></h3>
+                <p>
+                    Des sites archéologiques, établis sur le territoire de l'arrondissement de Shibuya, montrent que des humains, vivant durant la période Jōmon (13 000–400 ans av. J.-C.), occupaient les parties élevées du plateau de Musashino. Des kofun (monuments funéraires),
+                    des objets faits d'argile et des os humains ont été sortis de terre10. L'histoire de la région, durant les périodes Nara (710 – 794) et Heian, reste très peu connue. Le plateau de Musashino est alors une vaste étendue sauvage10. En
+                    1092, un clan de samouraïs donne son nom à une fortification militaire et à un lieu de culte du shintō. Le château de Shibuyal 8 a été détruit en 1524, par le clan Go-Hōjō. Au début du xxie siècle, seul le sanctuaire Shibuya Hachimanl
+                    9, couramment appelé Konnō Hachiman-gūl 10, a été préservé11,12,2. L'histoire de Shibuya commence à s'écrire au cours de l'époque de Kamakura (1185-1333), dans la province de Musashi, sous l'impulsion du clan Musashi10. Jusqu'à l'époque
+                    d'Edo (1603-1868), dans le fief du clan Go-Hōjō, des villages se développent, parmi lesquels Harajukul 11, Sendagayal 12, Hatagayal 13 et Shimoshibuyal 14,10. Pendant le shogunat Tokugawa, ils prospèrent comme extension du domaine
+                    du pouvoir central qui siège à Edo10. Après la restauration de Meiji, le nouveau gouvernement, installé à Tokyo, remodèle l'organisation administrative du pays. Le district de Shibuya est officiellement créé, en 1869, dans la préfecture
+                    de Musashi10. En 1889, le village de Shibuyal 15 est fondé. En 1904, il comprend 8 954 habitations et rassemble une population de 35 191 habitants10. Le 1er octobre 1932, le village de Shibuya devient l'un des 35 arrondissements de
+                    la ville de Tokyo ; il inclut la vallée du cours supérieur du fleuve Shibuya, le quartier résidentiel de Yoyogi et celui de Harajuku10,6. L'année 1947, après la Seconde Guerre mondiale, Shibuya est maintenu parmi les 23 arrondissements
+                    spéciaux de la capitale japonaise13. À partir de 1955, des gratte-ciel sont construits. Shibuya s'établit comme un centre d'affaires, administratif et commercial, désservi par de nombreuses lignes de chemins de fer, la ligne Yamanote,
+                    notamment10,6. La tenue des Jeux olympiques d'été de 1964 entraîne une accélération du développement urbain10,6. Par la suite, les boutiques de mode se multiplient et l'arrondissement de Shibuya devient le lieu de rendez-vous favori
+                    de la jeunesse tokyoïte10,6. En particulier, l'année 1979, est inauguré l'un des symboles de Shibuya : 109, un centre commercial de dix étages, dédié à l'habillement pour femmes jusqu'en 1996, puis ciblant les jeunes14.
+
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button [ngStyle]="{'color': like ? 'blue' : 'grey'}" (click)="like = !like">
+          <mat-icon>thumb_up</mat-icon>
+          Like
+        </button>
+                <button mat-button (click)="favorite = !favorite">
+          <mat-icon *ngIf="favorite">favorite</mat-icon>
+          <mat-icon *ngIf="!favorite">favorite_border</mat-icon>
+          Love
+        </button>
+                <button mat-button [ngStyle]="{'color': instructive ? 'orange' : 'grey'}" (click)="instructive = !instructive">
+          <mat-icon>emoji_objects</mat-icon>
+          Instructive
+        </button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan="1">
+        <mat-card class="card">
+            <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                <h3>Recent Posts</h3>
+            </mat-card-title>
+            <mat-card-content>
+                <div class="example-container mat-elevation-z8">
+                    <mat-table #table [dataSource]="dataSource">
+                        <ng-container matColumnDef="date_posted">
+                            <mat-header-cell *matHeaderCellDef> Date Posted </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.date_posted | date: 'd/M/y'}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="title">
+                            <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="category">
+                            <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="delete">
+                            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <a (click)="deletePost(element.position)" type="button">
+                                    <mat-icon class="icon">delete</mat-icon>
+                                </a>
+                            </mat-cell>
+                        </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="2">
+
+        <!-- // Write a comment -->
+        <!-- <div *ngIf="showComment && !isFetching"> -->
+        <form class="create-form " [formGroup]="CommentForm" novalidate (ngSubmit)="onSubmit(CommentForm.value, comment.value)" style="height: 60%;width: 40%;">
+            <mat-form-field class="form-group " style="width: 160%; margin-bottom: auto;     margin-left: 5%;">
+                <mat-label for="comment ">Comment</mat-label>
+                <textarea matInput class="form-control " rows="5 " id="comment " formControlName="comment" style="margin: 6%; border: 1px solid;" #comment></textarea>
+                <mat-hint align="end">Write your comment here ...</mat-hint>
+                <button mat-raised-button type="submit " [disabled]="!CommentForm.valid " mat-stroked-button>
+          <mat-icon>mark_chat_read</mat-icon>
+          comment
+        </button>
+            </mat-form-field>
+        </form>
+
+        <!-- display all comment -->
+        <div *ngIf="commentsList " style="margin-top: 40%;width: 500px;height: auto;">
+            <hr>
+            <mat-form-field appearance="fill" *ngFor="let c of commentsList ">
+                <mat-label>{{c.commentDate| date:"medium"}}</mat-label>
+                <textarea matInput disabled style="width: 300px;height: 60px;margin-left: 0%;">
+
+              {{c.commentContent}}
+
+              -> by : {{c.userName}}
+            </textarea>
+                <hr>
+            </mat-form-field>
+        </div>
+
+
+    </mat-grid-tile>
+
+</mat-grid-list>

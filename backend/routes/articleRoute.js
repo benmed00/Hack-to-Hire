@@ -6,10 +6,13 @@ const articleCtrl = require("../controllers/articleController");
 
 const auth = require("../authentification/authMiddleware");
 
-router.get("/", articleCtrl.getAllArticles);
-router.post("/", auth, articleCtrl.createArticle);
-router.get("/:id", articleCtrl.getOneArticle);
-router.put("/:id", auth, articleCtrl.modifyArticle);
-router.delete("/:id", auth, articleCtrl.deleteArticle);
+const authorize = require("../middleware/role");
+
+
+router.get("/", authorize(), articleCtrl.getAllArticles);
+router.post("/", authorize(), articleCtrl.createArticle);
+router.get("/:id", authorize(), articleCtrl.getOneArticle);
+router.put("/:id", authorize(), articleCtrl.modifyArticle);
+router.delete("/:id", authorize(), articleCtrl.deleteArticle);
 
 module.exports = router;
