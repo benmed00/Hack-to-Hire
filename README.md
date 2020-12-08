@@ -20,10 +20,10 @@ Backend Nodejs 14 : npm start (nodemon server)`http://localhost:3000/`
 
 ## Backend
 - Nodejs(Express)
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Backend
+## FrontEnd
 Front-End is not complet
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
